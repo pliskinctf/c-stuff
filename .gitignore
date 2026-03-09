@@ -1,0 +1,10 @@
+# Ignore compiled binaries
+*.out
+*.exe
+*.o
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore practice folders (where we do micro-assignments)
+**/practice/
