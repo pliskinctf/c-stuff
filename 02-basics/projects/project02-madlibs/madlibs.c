@@ -1,6 +1,14 @@
+/*
+Author: pliskinctf
+Date: 11th March 2026
+Purpose: this project was to practice taking user input with scanf and string concat.
+*/
+
 #include <stdio.h>
 
 int main() {
+    //using strings instead of char because char can only store one character
+    //we will need alot more than one char per variable.
     char persons_name[50];
     char adjective[50];
     char object_name[50];
