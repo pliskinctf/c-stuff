@@ -15,6 +15,7 @@ I am building a foundational understanding of computer systems, memory managemen
 This repository serves as an evolving portfolio of my work. As I progress, new modules and systems projects will be added here.
 
 * **01-setup:** Environment configuration and initial compiler testing.
+* **02-basics:** Systems foundations, memory allocation, strict data types, standard I/O (`printf`/`scanf` and memory addresses), explicit type casting, and hardware limits (integer overflow).
+  * *Projects:* Madlibs Generator, Age & Heartbeat Calculator, Server Capacity Planner, Raw Data Inspector (ASCII/Hex).
 
 ---
-
