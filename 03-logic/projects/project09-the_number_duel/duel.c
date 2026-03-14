@@ -1,29 +1,58 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int main()
+int main() 
 {
-	int cpu_number_hardcoded = 61;
-	int player_guess;
+	//generated seed
+	srand(time(NULL));
 
-	printf("guess the number (hint: its between 0 and 100): ");
-	scanf("%d", &player_guess);
-	
-	if (player_guess > 100 || player_guess < 0)
-	{
-		printf("you have to pick a number between 1 and 100\n");
+	//needed variables
+	int computer_choice = (rand() % 100) + 1;
+	int strike = 0;
+	int player_input;
+	int player_won = 0;
+
+	//10 tries
+	while (strike <= 10) {
+
+		//display menu and take user input
+		printf("tries remaining:\t%d\n", 10 - strike);
+		printf("\nGUESS THE NUMBER (its between 0 and 100): ");
+		scanf("%d", &player_input);
+		
+		//validate input
+		if (player_input < 1 || player_input > 100) {
+			printf("invalid input, try again\n");
+			continue;
+		}
+
+		//game logic
+		if (player_input > computer_choice) {
+			printf("wrong answer, try again\n");
+			strike++;
+			printf("hint: try a smaller number\n");
+			continue;
+		}
+		else if (player_input < computer_choice) {
+			printf("wrong answer, try again\n");
+			strike++;
+			printf("hint: try a bigger number\n");
+			continue;
+		}
+
+		player_won = 1;
+
+		break;
+
 	}
-	else if (player_guess == cpu_number_hardcoded)
-	{
-		printf("its a draw!\n");
+
+	if (player_won == 1) {
+	printf("\nyou guessed right, YOU WIN\n"); 
 	}
-	else if (player_guess > cpu_number_hardcoded)
-	{
-		printf("you win!\n");
+	else {
+		printf("\nyou lost\n");
 	}
-	else
-	{
-		printf("you lose!\n");
-	}
-	
+
 	return 0;
 }
