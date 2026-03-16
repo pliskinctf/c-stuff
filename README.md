@@ -30,4 +30,4 @@ Navigate to the desired project directory and compile the `.c` source file using
 gcc main.c -o program_name
 
 # Run the compiled binary
-./program_name
+./insert_program_name_here
