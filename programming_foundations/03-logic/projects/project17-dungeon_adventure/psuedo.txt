@@ -1,0 +1,191 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
+
+int main() {
+    srand(time(NULL)); //generate seed
+    
+    int player_health = 30;
+    int max_health = 50;
+    int potions_in_inventory = 1;
+    int gold_coins_in_inventory = 0;
+
+    for (int room_no = 1; room_no <=5; room_no++) {
+        printf("\n--- STEPPING INTO ROOM %d ---\n", room);
+
+        //generate the room scenario
+        int roll = (rand() % 10) + 1;
+
+        //monster encounter
+        if (roll <= 3) {
+            while(1) {
+                //logic for the monster encounter
+                /*
+
+                -print that a monster has appeared and you have to fight them
+                -variables needed for the encounter
+                    -monster_health;
+                    -player_attack_dmg;
+                    -monster_attack_dmg;
+                    -battle_menu_input;
+
+                //display menu and take user input
+                do {
+                    print(monster's health:\t%d\n, monster_health);
+                    print(player's health: \t%d\n, player_health);
+                    print(potions:         \t%d\n, potions_in_inventory);
+
+                    print(choose an option\n1-Attack\n2-Use Potion (+10HP)\n3-Quit));
+                    scanf("%d", &battle_menu_input);
+
+                    //battle logic
+                    if (!battle_menu_input) {
+                        print error
+                        continue; //this will take you back to the top of the do while
+                    }
+
+                    if (battle_menu_input is 1) {
+                        print(player is now attacking...)
+                        player_attack_dmg = (rand() % 6) + 3;
+                        monster_health -= player_attack_dmg;
+
+                        sleep(1) //now its the monster's turn
+
+                        print(player is now attacking...)
+                        monster_attack_dmg = (rand() % 6) + 2;
+                        player_health -= monster_attack_dmg;
+
+                    }
+                    else if (battle_menu_input is 2) {
+
+                        //first we need to check if we have any potions
+                        if (potions exist) {
+                            player_health+= 10;
+                            potions_in_inventory--;
+                            continue; //go back to the start of do while with new stats
+                        }
+                        else {
+                            print(you dont have any potions)
+                            continue; //nothing changes
+                        }
+
+                    }
+                    else {
+                        print(goodbye message);
+                        return 1;
+                    }
+
+                    //now the reward system
+                    if (player_health > 0 && monster_health =< 0) {
+                        int monster_gold_drop = (rand() + 11) + 5;
+                        gold_coins_in_inventory += monster_gold_drop;
+
+                        //if the monster dropped a potion
+                        if (rand() % 4 == 0) {
+                            print(the monster dropped %d gold coins and 1 potion, monster gold drop);
+                            potions_in_inventory++;
+                            print("you now have %d gold coins and %d potion(s)", gold_coins_in_inventory, potions_in_inventory);
+                        }
+                        else {
+                            print(the monster dropped %d gold coins, monster gold drop);
+                            print("you now have %d gold coins and %d potion(s)", gold_coins_in_inventory, potions_in_inventory);
+                        }
+                        break;
+                    }
+
+
+                } while (player_health > 0 && monster_health > 0);
+                */
+                
+                break; //the room encounter is over, now we can exit the while(1) loop
+                //       and now player health check will happen, then the rest part.
+            }
+        }
+
+        //treasure room
+        else if (roll <=6) {
+            while(1) {
+                //logic for the treasure room
+                /*
+                print(you found a treasure chest!)
+                int gold_found = (rand() % 20) + 10;
+                gold_coins_in_inventory += gold_found;
+
+                //if you find a potion as well then do this:
+                if (rand() % 4 == 0) {
+                    printf("you found %d gold coins and 1 potion!\n", gold_found);
+                    print("you now have %d gold and %d potion(s)\n", gold_coins_in_inventory, potions_in_inventory);
+                    break; //exit the while (1) loop
+                }
+                else {
+                    printf("you found %d gold coins!\n", gold_found);
+                    print("you now have %d gold and %d potion(s)\n", gold_coins_in_inventory, potions_in_inventory);
+                    break; //the room encounter is now over and we will now check the player
+                    //      health and ask them if they want to rest or not...
+                }
+                */
+            }
+        }
+
+        //trap room
+        else if (roll <=8) {
+            while(1) {
+                //logic for the trap room
+                print("you fell into a trap!, you took 15 damage\n);
+                player_health -= 15;
+                if (player_health < 0) {
+                    break;
+                }
+                else {
+                    print("your remaining health is:\t%d\n", player_health);
+                    break;
+                }
+            }
+        }
+
+        //empty room
+        else {
+            while(1) {
+                //logic for the empty room
+                printf("there is nothing on this room\n");
+                break;
+            }
+        }
+
+        //once a room is complete, check the player's health before
+        //moving onto the next room
+        if (player_health <=0) {
+            printf("you died in room %d... game over :(\n", room_no);
+            break; //exit if player died
+        }
+
+        //if the player is still alive after the room ends, ask if
+        //they want to rest for a bit
+        while(1) {
+            int user_input_for_rest;
+            printf("Do you want to rest? (1. Yes (+5 HP)/ 2. No): ");
+            if (invalid input) {
+                print(error message)
+                continue; //ask the user again
+            } else if (user_input is 1) {
+                /*
+                //thinking of adding a for loop which counts down from 10 to 1
+                //like this: time remaining: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1...
+                //with the help of sleep() inside the for loop
+                */
+                player_health += 5;
+                print("your health is now %d\n", player_health);
+            } else {
+                print(continuing to next room);
+            }
+
+            break;
+        }
+    }
+
+    //once the loop is over, and the player is still alive
+    if (player_health > 0) { //this is outside the for loop btw
+        printf("VICTORY!... you cleared all 5 rooms!\n");
+    }
+}
