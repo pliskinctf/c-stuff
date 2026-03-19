@@ -94,8 +94,6 @@ int main()
                 //take the validated username and store it in username_to_store
                 snprintf(username_to_store, sizeof(username_to_store), "%s", &username_buffer[starting_index]);
 
-                printf("username:\t%s\n", username_to_store); //remove this line, only for testing
-
                 break; //we will use the 'username_to_store' array later on
             }
 
@@ -129,17 +127,26 @@ int main()
                 //take the validated password and store it in password_to_store
                 snprintf(password_to_store, sizeof(password_to_store), "%s", &password_buffer[starting_index]);
 
-                printf("password:\t%s\n", password_to_store); //remove this line after testing is done as well.
-
                 break;
             }
 
             //now we have to strcpy the validated credentials and store it in the array, also update counter
+            strcpy(usernames[counter], username_to_store);
+            strcpy(passwords[counter], password_to_store);
 
+            printf("\nat counter %d\n", counter);         //remove these after testing
+            printf("username:\t%s\n", usernames[counter]);
+            printf("password:\t%s\n", passwords[counter]);
+
+            counter++;
             
         }
+
+        if (counter >=10) {
+            printf("MAX STORAGE LIMIT REACHED\ngoodbye...\n");
+            break;
+        }
         
-        break; //break out of while(1)
     }
     
 
