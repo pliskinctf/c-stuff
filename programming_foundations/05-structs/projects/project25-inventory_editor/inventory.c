@@ -8,7 +8,7 @@
 
 int main() {
     //store and track inventory
-    int inventory[MAX_CAPACITY] = {0};
+    char inventory[MAX_CAPACITY][INPUT_MAX_CAPACITY];
     int count = 0;
 
     while (1) {
@@ -16,6 +16,7 @@ int main() {
         char menu_buffer[INPUT_MAX_CAPACITY];
         char add_buffer[INPUT_MAX_CAPACITY];
         char delete_buffer[INPUT_MAX_CAPACITY];
+        int repeat_loop = 0;
         int menu_input = 0;
 
         do //print menu and take/validate user input for menu
@@ -40,27 +41,99 @@ int main() {
             
         } while (menu_input != 1 && menu_input != 2 && menu_input !=3 && menu_input !=4);
 
-        //now logic for the rest of the program
+        //now logic for the CRUD operations... no 'U' cuz not needed in inventory stuff ig
         switch (menu_input)
         {
+        //ADD ITEM TO INVENTORY
         case 1:
-            //do something
+            //bounds check
+            if (count < MAX_CAPACITY) 
+            { 
+
+                char item_to_add[INPUT_MAX_CAPACITY]; //to hold the validated input for the item
+
+                while(1) {
+                    //take user input for adding a task
+                    printf("what would you like to add to your inventory: ");
+                    fgets(add_buffer, sizeof(add_buffer), stdin);
+                    add_buffer[strcspn(add_buffer, "\n")] = '\0';
+
+                    //check for shellcode
+                    size_t length = strlen(add_buffer);
+                    for (size_t i = 0; i < length; i++) {
+                        if (ispunct(add_buffer[i]) != 0) {
+
+                            if (add_buffer[i] == ';' || add_buffer[i] == '|' || add_buffer[i] == '&') {
+                                printf("invalid input, no shellcode allowed\n");
+                                break; //will go back to while(1) to take input again
+                            }
+
+                        }
+                    }
+
+                    //trim whitespaces now
+                    int starting_index = 0;
+                    while (isspace(add_buffer[starting_index]))
+                    {
+                        starting_index++;
+                    }
+
+                    int ending_index = length - 1; //minus 1 to not include any potential '\0'
+                    while (ending_index > starting_index && isspace(add_buffer[ending_index]))
+                    {
+                        ending_index--;
+                    }
+
+                    add_buffer[ending_index + 1] = '\0';
+
+                    //now add the item to the inventory array
+                    snprintf(item_to_add, sizeof(item_to_add), "%s", &add_buffer[starting_index]);
+
+                    strcpy(inventory[count], item_to_add);
+                    printf("you added %s at index %d in your inventory\n", inventory[count], count);
+                    count++;
+
+                    break; //exit the while(1)
+                }
+
+            }
+            else 
+            {
+                printf("inventory is full, can not add more items\n");
+            }
+
             break;
+
         case 2:
-            //do something
+            printf("placeholder for %d\n", menu_input);
             break;
+
         case 3:
-            //do something
+            printf("placeholder for %d\n", menu_input);
             break;
+
         case 4:
-            //do something
+            printf("placeholder for %d\n", menu_input);
             break;
+
         default:
             printf("something went wrong during the switch statement\n");
             break;
         }
         
-        break; //break out of while(1)
+        //ask the user if they want to exit or keep using the program:
+        printf("\nexit inventory? (1 for yes, 0 for no): ");
+        scanf("%d", &repeat_loop);
+        getchar();
+        if (repeat_loop == 1) 
+        {
+            break;
+        }
+        else 
+        {
+            continue;
+        }
+
     }
 
     return 0;
