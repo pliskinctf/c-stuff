@@ -125,8 +125,22 @@ int main() {
 
         //DELETE AN ITEM FROM THE INVENTORY
         case 3:
-            printf("placeholder for %d\n", menu_input);
-            break;
+            if (count != 0) 
+            {
+                printf("delete logic...\n"); //remove AFTER testing
+                //print menu for delete
+
+                //take user input with fgets (delete_buffer)
+
+                //delete logic
+
+                break;
+            } 
+            else 
+            {
+                printf("there is nothing in your inventory to delete...\n");
+                break;
+            }
 
         //EXIT PROGRAM
         case 4:
