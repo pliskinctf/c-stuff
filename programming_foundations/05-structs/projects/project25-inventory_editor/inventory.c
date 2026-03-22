@@ -18,6 +18,7 @@ int main() {
         char delete_buffer[INPUT_MAX_CAPACITY];
         int repeat_loop = 0;
         int menu_input = 0;
+        int delete_input = 0;
         int exit_program = 0; //bool
 
         do //print menu and take/validate user input for menu
@@ -125,21 +126,48 @@ int main() {
 
         //DELETE AN ITEM FROM THE INVENTORY
         case 3:
-            if (count != 0) 
-            {
-                printf("delete logic...\n"); //remove AFTER testing
-                //print menu for delete
-
-                //take user input with fgets (delete_buffer)
-
-                //delete logic
-
-                break;
-            } 
-            else 
+            if (count == 0) 
             {
                 printf("there is nothing in your inventory to delete...\n");
                 break;
+            }
+            else 
+            {
+                while (1)
+                {
+                    //print items in inventory
+                    for (int i = 0; i < count; i++) {
+                        printf("%d:\t%s\n", i + 1, inventory[i]);
+                    }
+
+                    printf("which item do you want to drop? (1-%d): ", count);
+                    fgets(delete_buffer, sizeof(delete_buffer), stdin);
+                    delete_buffer[strcspn(delete_buffer, "\n")] = '\0';
+
+                    delete_input = atoi(delete_buffer);
+
+                    //validate the input
+                    if (delete_input < 1 || delete_input > count) {
+                        printf("invalid input, try again...\n");
+                        continue;
+                    }
+
+                    break; //exit the while(1) loop if valid input
+                }
+
+                //delete logic
+                int dlt_pos = delete_input - 1;
+
+                for (int i = dlt_pos; i < count - 1; i++) {
+                    strcpy(inventory[i], inventory[i + 1]);
+                }
+
+                count--;
+
+                printf("item dropped from inventory\n");
+
+                break; //this is for the switch statement
+                
             }
 
         //EXIT PROGRAM
