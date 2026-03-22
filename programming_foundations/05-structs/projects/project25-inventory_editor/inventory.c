@@ -18,6 +18,7 @@ int main() {
         char delete_buffer[INPUT_MAX_CAPACITY];
         int repeat_loop = 0;
         int menu_input = 0;
+        int exit_program = 0; //bool
 
         do //print menu and take/validate user input for menu
         {
@@ -117,7 +118,8 @@ int main() {
 
         //EXIT PROGRAM
         case 4:
-            printf("placeholder for %d\n", menu_input);
+            exit_program = 1;
+            printf("goodbye...\n");
             break;
 
         default:
@@ -125,9 +127,10 @@ int main() {
             break;
         }
         
-        //replace this with fgets... its just better.
-        //ask the user if they want to exit or keep using the program:
-        //would probably have to wrap this in a while(1)
+        if (exit_program == 1) {
+            break;
+        }
+
         do
         {
             printf("\nexit inventory? (1 for yes, 0 for no): ");
