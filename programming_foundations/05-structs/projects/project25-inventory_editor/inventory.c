@@ -44,6 +44,7 @@ int main() {
         //now logic for the CRUD operations... no 'U' cuz not needed in inventory stuff ig
         switch (menu_input)
         {
+
         //ADD ITEM TO INVENTORY
         case 1:
             //bounds check
@@ -104,14 +105,17 @@ int main() {
 
             break;
 
+        //LIST ALL ITEMS IN INVENTORY
         case 2:
-            printf("placeholder for %d\n", menu_input);
+        printf("placeholder for %d\n", menu_input);
             break;
 
+        //DELETE AN ITEM FROM THE INVENTORY
         case 3:
             printf("placeholder for %d\n", menu_input);
             break;
 
+        //EXIT PROGRAM
         case 4:
             printf("placeholder for %d\n", menu_input);
             break;
@@ -121,17 +125,24 @@ int main() {
             break;
         }
         
+        //replace this with fgets... its just better.
         //ask the user if they want to exit or keep using the program:
-        printf("\nexit inventory? (1 for yes, 0 for no): ");
-        scanf("%d", &repeat_loop);
-        getchar();
+        //would probably have to wrap this in a while(1)
+        do
+        {
+            printf("\nexit inventory? (1 for yes, 0 for no): ");
+            scanf("%d", &repeat_loop);
+            getchar();
+
+        } while (repeat_loop != 1 && repeat_loop != 0);
+
         if (repeat_loop == 1) 
         {
-            break;
+            break; //exit while(1)
         }
         else 
         {
-            continue;
+            continue; //repeat while(1)
         }
 
     }
