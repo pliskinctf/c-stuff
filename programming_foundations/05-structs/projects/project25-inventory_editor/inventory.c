@@ -25,13 +25,15 @@ int main() {
             printf("\n=================\n");
             printf("1- Add Item\n");
             printf("2- List All Items\n");
-            printf("3- Delete a Item\n");
+            printf("3- Delete An Item\n");
             printf("4- Quit\n");
             printf("==================\n");
             printf("choose an option: ");
 
             fgets(menu_buffer, sizeof(menu_buffer), stdin);
             menu_buffer[strcspn(menu_buffer, "\n")] = '\0';
+
+            printf("\n"); //just to make the UI cleaner
 
             menu_input = atoi(menu_buffer);
 
@@ -92,7 +94,7 @@ int main() {
                     snprintf(item_to_add, sizeof(item_to_add), "%s", &add_buffer[starting_index]);
 
                     strcpy(inventory[count], item_to_add);
-                    printf("you added %s at index %d in your inventory\n", inventory[count], count);
+                    printf("\n!LOG!: you added %s at index %d in your inventory\n", inventory[count], count);
                     count++;
 
                     break; //exit the while(1)
@@ -108,8 +110,18 @@ int main() {
 
         //LIST ALL ITEMS IN INVENTORY
         case 2:
-        printf("placeholder for %d\n", menu_input);
+        if (count != 0) 
+        {
+            for (int i = 0; i < count; i++) {
+                printf("item no: %d:\t%s\n", i + 1, inventory[i]);
+            }
             break;
+        }
+        else 
+        {
+            printf("inventory is empty, no items to list\n");
+            break;
+        }
 
         //DELETE AN ITEM FROM THE INVENTORY
         case 3:
